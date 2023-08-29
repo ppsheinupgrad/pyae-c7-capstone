@@ -16,7 +16,11 @@ resource "aws_subnet" "public_subnet" {
   cidr_block              = "10.20.${10 + count.index}.0/24"
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch = true
-  tags                    = merge(local.tags, { Name = "${var.environment}-public-subnet-${data.aws_availability_zones.available.names[count.index]}" })
+  tags = merge(local.tags, {
+    Name                                   = "${var.environment}-public-subnet-${data.aws_availability_zones.available.names[count.index]}",
+    "kubernetes.io/cluster/${var.project}" = "shared",
+    "kubernetes.io/role/elb"               = 1
+  })
 }
 
 resource "aws_subnet" "private_subnet" {
@@ -25,7 +29,11 @@ resource "aws_subnet" "private_subnet" {
   cidr_block              = "10.20.${20 + count.index}.0/24"
   availability_zone       = data.aws_availability_zones.available.names[count.index]
   map_public_ip_on_launch = false
-  tags                    = merge(local.tags, { Name = "${var.environment}-private-subnet-${data.aws_availability_zones.available.names[count.index]}" })
+  tags = merge(local.tags, {
+    Name                                   = "${var.environment}-private-subnet-${data.aws_availability_zones.available.names[count.index]}",
+    "kubernetes.io/cluster/${var.project}" = "shared",
+    "kubernetes.io/role/internal-elb"      = 1
+  })
 }
 
 resource "aws_eip" "eip" {
