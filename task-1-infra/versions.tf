@@ -10,7 +10,7 @@ terraform {
   backend "s3" {
     region  = "us-east-1"
     bucket  = "ppshein-upgrad-devops-tfstate"
-    key     = "upgrad.tfstate"
+    key     = "upgrad_capstone.tfstate"
     encrypt = true
   }
 }

@@ -1,4 +1,4 @@
-project     = "upgrad-pyae-capstone"
+project     = "pyae-c7-capstone-eks"
 environment = "dev"
 
 vpc = {

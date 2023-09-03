@@ -1,0 +1,14 @@
+---
+eksctl utils associate-iam-oidc-provider \
+--region us-east-1 \
+--cluster pyae-c7-capstone-eks \
+--approve
+---
+eksctl create iamserviceaccount \
+--cluster=pyae-c7-capstone-eks \
+--namespace=kube-system \
+--region=us-east-1 \
+--name=aws-load-balancer-controller \
+--attach-policy-arn=arn:aws:iam::007869898307:policy/AWSLoadBalancerControllerIAMPolicy \
+--override-existing-serviceaccounts \
+--approve
