@@ -1,0 +1,25 @@
+# especially for cache configuration
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: local-storage
+provisioner: kubernetes.io/no-provisioner
+volumeBindingMode: WaitForFirstConsumer
+allowVolumeExpansion: true
+reclaimPolicy: Delete
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Release.Name }}-pv1
+  labels:
+{{- include "labels" . | nindent 4 }}
+spec:
+  storageClassName: {{ .Values.redis.storageClassName }}
+  capacity:
+    storage: {{ .Values.redis.storage }}
+  accessModes:
+    - ReadWriteOnce
+  hostPath:
+    path: "/storage/data1"

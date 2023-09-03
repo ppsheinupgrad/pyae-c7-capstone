@@ -1,0 +1,6 @@
+redis:
+  storage: 1Gi # GiB
+  storageClassName: local-storage
+  name: redis
+  port: 6379
+  replica: 1

@@ -1,0 +1,4 @@
+##deployment
+redis:
+  image: redis:6.2.3-alpine
+  required: true

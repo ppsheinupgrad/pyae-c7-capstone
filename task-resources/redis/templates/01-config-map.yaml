@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    meta.helm.sh/release-name: { { .Release.Name } }
+    meta.helm.sh/release-namespace: { { .Release.Name } }
+  name: redis-{{ .Release.Name }}-config
+  namespace: { { .Values.namespace } }
+data:
+  redis.conf: |
+    maxmemory 2mb
+    maxmemory-policy allkeys-lru
+    dir /var/lib/redis
+    appendonly yes
+    protected-mode no
