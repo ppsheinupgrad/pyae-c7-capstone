@@ -55,6 +55,7 @@ spec:
             cpu: 200m
             memory: 200Mi
         args: ["/var/lib/redis/redis.conf"]
+        restartPolicy: Always
         ports:
         - containerPort: {{ .Values.redis.port }}
           name: redis
