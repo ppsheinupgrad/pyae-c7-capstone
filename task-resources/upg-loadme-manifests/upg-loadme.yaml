@@ -38,6 +38,11 @@ spec:
               cpu: 1000m
               memory: 400Mi
           imagePullPolicy: Always
+      tolerations:
+        - key: "dedicated"
+          operator: "Equal"
+          value: "upg"
+          effect: "NoSchedule"
       restartPolicy: Always
       terminationGracePeriodSeconds: 10
       dnsPolicy: ClusterFirst
